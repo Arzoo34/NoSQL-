@@ -492,8 +492,7 @@ Row Key: user:1001
 **Definition**: A graph database stores data as **nodes** (entities) and **edges** (relationships). Both nodes and edges can have **properties** (key-value pairs). Relationships are **first-class citizens** — they are stored natively and can be queried directly.
 
 **Structure:**
-
-text
+```text
 
 Node: Alice (Person)
   - name: "Alice"
@@ -506,6 +505,7 @@ Edge: Alice → Bob (FRIEND)
 Edge: Alice → Mumbai (LIVES_IN)
   - since: 2015
 
+```
 **Aggregate characteristic**: Graph databases do **NOT** use aggregate orientation. Data is stored as independent nodes and edges. There is no "aggregate" unit.
 
 **Features:**
@@ -562,11 +562,10 @@ Edge: Alice → Mumbai (LIVES_IN)
 **How it works:**
 
 In a schema-less document database, you can insert these two documents into the same collection:
-
-json
-
+```json
 { "name": "Alice", "age": 30, "email": "alice@email.com" }
 { "name": "Bob", "phone": "123-456-7890", "address": "Mumbai" }
+```
 
 The first document has `age` and `email`; the second has `phone` and `address`. The database accepts both without complaint.
 
@@ -611,8 +610,6 @@ In aggregate-oriented databases, data is stored in a format optimized for **writ
 
 A materialized view for this query would store:
 
-text
-
 Product    | Total Sales
 -----------|------------
 Laptop     | 450,000
@@ -635,18 +632,16 @@ Keyboard   | 75,000
 **Example:**
 
 Base data (orders collection):
-
-json
-
+```json
 { "order_id": 100, "items": [{"product": "Laptop", "qty": 1}, {"product": "Mouse", "qty": 1}] }
 { "order_id": 101, "items": [{"product": "Laptop", "qty": 2}] }
+```
 
 Materialized view (sales_by_product collection):
-
-json
-
+```json
 { "_id": "Laptop", "total_qty": 3 }
 { "_id": "Mouse", "total_qty": 1 }
+```
 
 **Exam Point**: Materialized views are essential in NoSQL because aggregate-oriented storage is not optimized for all query patterns. They are the NoSQL equivalent of creating a custom index for a specific query.
 
@@ -731,9 +726,9 @@ json
 
 **Aggregate Models:**
 
-|Model|Aggregate|Query By|Best For|
-|---|---|---|---|
-|Key-Value|Value|Key|Caching, sessions|
-|Document|Document|Fields, key|CMS, e-commerce|
-|Column-Family|Row|Row key|Time-series, IoT|
-|Graph|None|Relationships|Social, routing|
+| Model         | Aggregate | Query By      | Best For          |
+| ------------- | --------- | ------------- | ----------------- |
+| Key-Value     | Value     | Key           | Caching, sessions |
+| Document      | Document  | Fields, key   | CMS, e-commerce   |
+| Column-Family | Row       | Row key       | Time-series, IoT  |
+| Graph         | None      | Relationships | Social, routing   |
